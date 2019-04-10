@@ -1,0 +1,28 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+}
+
+plugins {
+	id 'groovy'
+}
+apply plugin: 'java'
+
+group = 'com.gacme.policy'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+dependencies {
+//	compile('com.garyclayburg:stepsapi:0.5')
+//	compile('com.garyclayburg:scanrunner:0.5')
+	compile('com.garyclayburg:scanrunner:0.6.1-SNAPSHOT')
+	compile('org.codehaus.groovy:groovy-all') //matches groovy-all nested dependency of spock-core
+    testCompile(group: 'org.spockframework', name: 'spock-core', version:'1.1-groovy-2.4-rc-2')
+//	testCompile 'org.springframework.boot:spring-boot-starter-test:1.5.19.RELEASE'
+}

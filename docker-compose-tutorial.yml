@@ -1,0 +1,58 @@
+version: '2'
+services:
+  mongo1:
+    image: mongo
+    ports:
+      - "27017:27017"
+  synconsole1:
+    image: 'gclayburg/synconsole:0.6'
+    environment:
+      SYNC_BASEURL: '${HOSTNAME}:8081'
+      SPRING_DATA_MONGODB_URI: mongodb://mongo1:27017/synconsoledb
+    ports:
+      - "8082:8080"
+  visualsync1:
+    image: 'gclayburg/visualsync:0.6'
+#    image: 'registry:5000/visualsync:0.6'
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongo1:27017/visualsyncdb
+      POLICY_GROOVY_HOME: /policy
+      POLICY_ENABLEDSL: "true"
+      POLICY_FORCE_RECOMPILE_ENTRY_POINTS: "false"
+      POLICY_FORCE_RELOAD_POLICY_ENGINE: "false"
+    command: >
+      --policy.fragments.fakehr.host=fakehr
+      --policy.fragments.fakehr.port=8080
+      --policy.fragments.fakehr.uri=/api/v2
+      --policy.fragments.emailman.host=emailman
+      --policy.fragments.emailman.port=8080
+      --policy.fragments.emailman.uri=/api/v2
+      --policy.fragments.usersink.host=usersink
+      --policy.fragments.usersink.port=8080
+      --policy.fragments.usersink.uri=/api/v2
+    volumes:
+      - ./src/main/groovy:/policy
+    ports:
+      - "8081:8080"
+  fakehr:
+    image: 'gclayburg/memuser:0.6.5'
+    ports:
+      - "8091:8080"
+  usersink:
+    image: 'gclayburg/memuser:0.6.5'
+    ports:
+      - "8093:8080"
+  loadmem:
+    image: 'gclayburg/memuser:0.6.5'
+    entrypoint: /home/springboot/wait-for.sh -t 600 fakehr:8080 -- /home/springboot/loadusers.sh fakehr:8080
+    depends_on:
+      - fakehr
+  emailman:
+    image: 'gclayburg/memuser:0.6.5'
+    ports:
+      - "8092:8080"
+  loademail:
+    image: 'gclayburg/memuser:0.6.5'
+    entrypoint: /home/springboot/wait-for.sh -t 600 emailman:8080 -- /home/springboot/loademail.sh emailman:8080
+    depends_on:
+      - emailman
