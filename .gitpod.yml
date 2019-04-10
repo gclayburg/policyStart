@@ -1,3 +1,4 @@
+image: 'gclayburg/visualsync:0.6'
 tasks:
   - command: "java -version"
   - command: "echo hello terminal world"
