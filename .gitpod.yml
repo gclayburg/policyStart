@@ -1,0 +1,3 @@
+tasks:
+  - command: "java -version"
+  - command: "echo hello terminal world"
