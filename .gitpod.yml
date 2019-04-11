@@ -1,7 +1,7 @@
 image:
   file: Dockerfile
 tasks:
-  - command: "java -jar policyconsole-0.6.1-SNAPSHOT.jar"
+  - command: ". visualsyncenv.sh && java -jar policyconsole-0.6.1-SNAPSHOT.jar --server.port=8060"
   - command: "echo hello terminal world"
   - command: "/usr/local/bin/docker-entrypoint.sh mongod"
-
+  - command: "java -jar synconsole-0.7.1-SNAPSHOT.war --spring.data.mongodb.uri=mongodb://localhost:27017/synconsolegitpod --sync.baseurl=localhost:8060"
