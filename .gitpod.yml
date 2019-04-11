@@ -1,5 +1,7 @@
 image:
   file: Dockerfile
 tasks:
-  - command: "java -jar /home/gitpod/policyconsole-0.6.1-SNAPSHOT.jar"
+  - command: "exec java -jar policyconsole-0.6.1-SNAPSHOT.jar"
   - command: "echo hello terminal world"
+  - command: "exec /usr/local/bin/docker-entrypoint.sh mongod"
+
