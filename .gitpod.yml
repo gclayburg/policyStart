@@ -1,5 +1,5 @@
 image:
   file: Dockerfile
 tasks:
-  - command: "java -version"
+  - command: "java -jar /home/gitpod/policyconsole-0.6.1-SNAPSHOT.jar"
   - command: "echo hello terminal world"
