@@ -5,3 +5,8 @@ tasks:
   - command: "echo hello terminal world"
   - command: "/usr/local/bin/docker-entrypoint.sh mongod"
   - command: "java -Xmx1024m -XX:TieredStopAtLevel=1 -noverify -jar synconsole-0.7.1-SNAPSHOT.war --spring.data.mongodb.uri=mongodb://localhost:27017/synconsolegitpod --sync.baseurl=localhost:8060"
+ports:
+  - port: 8080
+    onOpen: open-preview
+  - port: 8060
+    onOpen: open-browser
