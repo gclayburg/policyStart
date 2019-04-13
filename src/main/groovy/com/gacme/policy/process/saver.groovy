@@ -19,7 +19,7 @@ import groovy.transform.BaseScript
 @BaseScript StepsBaseClass baseClass
 println 'begin'
 createNewUser()
-createReplace('usersink')
+//createReplace('usersink')
 
 def myc = {123}
 
@@ -29,6 +29,6 @@ CharSequence A = "21"
 String B = "21".substring(0)
 
 System.out.println("a is "+ A)
-println "A is $A"
+println "A really is stillss $A"
 println "B is $B"
 println "EQ is " + (B==A)
