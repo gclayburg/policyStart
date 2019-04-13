@@ -4,7 +4,7 @@ tasks:
   - command: "java -Xmx512m -XX:TieredStopAtLevel=1 -noverify -jar memuser-0.6.5.jar --server.port=8092"
   - command: "echo hello terminal world"
   - command: "/usr/local/bin/docker-entrypoint.sh mongod"
-  - command: "java -Xmx1024m -XX:TieredStopAtLevel=1 -noverify -jar synconsole-0.7.1-SNAPSHOT.war --spring.data.mongodb.uri=mongodb://localhost:27017/synconsolegitpod --sync.baseurl=self --policy.fragments.emailman.host=localhost --policy.fragments.emailman.port=8092 --policy.fragments.emailman.uri=/api/v2 --spring.profiles.active=prod,mongolocal"
+  - command: ". visualsyncenv.sh && java -Xmx1024m -XX:TieredStopAtLevel=1 -noverify -jar synconsole-0.7.1-SNAPSHOT.war --spring.data.mongodb.uri=mongodb://localhost:27017/synconsolegitpod --sync.baseurl=self --policy.fragments.emailman.host=localhost --policy.fragments.emailman.port=8092 --policy.fragments.emailman.uri=/api/v2 --spring.profiles.active=prod,mongolocal"
 ports:
   - port: 8080
     onOpen: open-preview
