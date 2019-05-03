@@ -1,10 +1,10 @@
 image:
   file: Dockerfile
 tasks:
-  - command: "java -Xmx512m -XX:TieredStopAtLevel=1 -noverify -jar memuser-0.6.5.jar --server.port=8092"
+  - command: "./memuser/launch.sh"
   - command: "echo hello terminal world"
   - command: "/usr/local/bin/docker-entrypoint.sh mongod"
-  - command: "./launch.sh"
+  - command: "./synconsole/launch.sh"
 ports:
   - port: 8080
     onOpen: open-preview
