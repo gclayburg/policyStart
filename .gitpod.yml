@@ -1,5 +1,5 @@
-image:
-  file: Dockerfile
+image: gclayburg/gitpodmongo:4.1.9
+#  file: Dockerfile
 tasks:
   - command: "./memuser/launch.sh"
   - command: "echo hello terminal world"
