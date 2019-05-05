@@ -2,10 +2,10 @@ image: gclayburg/synconsolegitpod:0.7.3-SNAPSHOT2
 #image: gclayburg/gitpodmongo:4.1.9
 #  file: Dockerfile
 tasks:
-  - command: "/home/gitpod/memuser/run.sh"
+  - command: "export JAVA_OPTS='-Xmx512m -XX:TieredStopAtLevel=1 -noverify' && /home/gitpod/memuser/run.sh --server.port=8092"
   - command: "echo hello terminal world"
   - command: "/usr/local/bin/docker-entrypoint.sh mongod"
-  - command: "/home/gitpod/synconsole/run.sh"
+  - command: "export JAVA_OPTS='-Xmx1024m -XX:TieredStopAtLevel=1 -noverify' && /home/gitpod/synconsole/run.sh --server.port=8080"
 ports:
   - port: 8080
     onOpen: open-preview
