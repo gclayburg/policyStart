@@ -1,4 +1,5 @@
-image: gclayburg/gitpodmongo:4.1.9
+image: gclayburg/synconsolegitpod:0.7.3-SNAPSHOT1
+#image: gclayburg/gitpodmongo:4.1.9
 #  file: Dockerfile
 tasks:
   - command: "./memuser/launch.sh"
