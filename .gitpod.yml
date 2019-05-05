@@ -2,10 +2,10 @@ image: gclayburg/synconsolegitpod:0.7.3-SNAPSHOT2
 #image: gclayburg/gitpodmongo:4.1.9
 #  file: Dockerfile
 tasks:
-  - command: "./memuser/launch.sh"
+  - command: "/home/gitpod/memuser/run.sh"
   - command: "echo hello terminal world"
   - command: "/usr/local/bin/docker-entrypoint.sh mongod"
-  - command: "./synconsole/launch.sh"
+  - command: "/home/gitpod/synconsole/run.sh"
 ports:
   - port: 8080
     onOpen: open-preview
