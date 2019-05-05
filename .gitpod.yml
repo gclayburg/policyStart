@@ -5,7 +5,12 @@ tasks:
   - command: "export JAVA_OPTS='-Xmx512m -XX:TieredStopAtLevel=1 -noverify' && /home/gitpod/memuser/run.sh --server.port=8092"
   - command: "echo hello terminal world"
   - command: "/usr/local/bin/docker-entrypoint.sh mongod"
-  - command: "export JAVA_OPTS='-Xmx1024m -XX:TieredStopAtLevel=1 -noverify' && /home/gitpod/synconsole/run.sh --server.port=8080"
+  - command: "export JAVA_OPTS='-Xmx1024m -XX:TieredStopAtLevel=1 -noverify' && /home/gitpod/synconsole/run.sh --server.port=8080 --spring.config.location=/home/gitpod/synconsole/"
 ports:
   - port: 8080
     onOpen: open-preview
+  - port: 8092
+    onOpen: open-browser
+  - port: 27017
+    onOpen: ignore
+
