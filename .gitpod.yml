@@ -14,3 +14,8 @@ ports:
   - port: 27017
     onOpen: ignore
 
+github:
+  prebuilds:
+    master: true
+    addComment: true
+
