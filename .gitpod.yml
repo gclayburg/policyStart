@@ -1,4 +1,4 @@
-image: gclayburg/synconsolegitpod:0.7.8
+image: gclayburg/synconsolegitpod:0.7.9
 #image: gclayburg/gitpodmongo:4.1.9
 #  file: Dockerfile
 tasks:
