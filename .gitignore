@@ -26,7 +26,7 @@
 /.nb-gradle/
 
 #vscode
-bin/
+/bin/
 
 #Ignore generated log files
 *.log
