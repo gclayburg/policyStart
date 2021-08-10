@@ -1,4 +1,4 @@
 rootProject.name = 'policyStart'
-//if (file("../../../../gvsync/visualsync").exists()){
-//    includeBuild "../../../../gvsync/visualsync"
+//if (file("../../../gvsync/visualsync").exists()){
+//    includeBuild "../../../gvsync/visualsync"
 //}

@@ -1,5 +1,9 @@
 buildscript {
 	repositories {
+		ext.artifactory_contexturl = project.properties['artifactory_contexturl'] ?: 'ignorethisinvalidurltrymavencentralinstead'
+		maven {
+			url "${artifactory_contexturl}/${artifactory_resolve_repo}"
+		}
 		mavenCentral()
 	}
 }
@@ -12,18 +16,20 @@ apply plugin: 'java'
 group = 'com.gacme.policy'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
-
+ext.artifactory_contexturl = project.properties['artifactory_contexturl'] ?: 'ignorethisinvalidurltrymavencentralinstead'
 repositories {
+	maven {
+		url "${artifactory_contexturl}/${artifactory_resolve_repo}"
+	}
 	mavenCentral()
-	mavenLocal()
+}
+
+configurations.all {
+	resolutionStrategy.cacheChangingModulesFor 4, 'minutes'  // I want to make sure to try to download the latest snapshot, i.e. scanrunner under development
 }
 
 dependencies {
-//	compile('com.garyclayburg:stepsapi:0.5')
-//	compile('com.garyclayburg:scanrunner:0.5')
-//	compile('com.garyclayburg:scanrunner:0.6.1-SNAPSHOT')
-	compile('com.garyclayburg:scanrunner:0.7.3-SNAPSHOT')
+	compile('com.garyclayburg:scanrunner:0.8.3')
 	compile('org.codehaus.groovy:groovy-all') //matches groovy-all nested dependency of spock-core
     testCompile(group: 'org.spockframework', name: 'spock-core', version:'1.1-groovy-2.4-rc-2')
-//	testCompile 'org.springframework.boot:spring-boot-starter-test:1.5.19.RELEASE'
 }
