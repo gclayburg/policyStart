@@ -3,7 +3,7 @@ tasks:
     command: echo 'starting build'
   - name: server run
     init: docker-compose pull
-    command: "docker-compose up -d && docker-compose -f"
+    command: "docker-compose up -d && docker-compose logs -f"
 #  - name: batch pull
 #    init: docker-compose -f config/docker-compose
 ports:
