@@ -31,3 +31,4 @@
 #Ignore generated log files
 *.log
 *.out
+/gradle.properties
