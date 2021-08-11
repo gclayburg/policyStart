@@ -1,0 +1,22 @@
+version: '3'
+services:
+  batchrun:
+    image: "${DOCKERREPO}/scanrunner:latest"
+    environment:
+      JAVA_OPTS: -Xmx64m -XX:TieredStopAtLevel=1 -noverify
+      POLICY_GROOVY_HOME: /policy
+      SPRING_CONFIG_LOCATION: /config/
+      SCAN_VERSION: "true"
+    volumes:
+      - ../src/main/groovy:/policy
+      - .:/config
+networks:
+  default:
+    external:
+      name: policystart_policynet # shared with ../docker-compose.yml
+
+# e.g. run with:
+# $ docker-compose -f docker-compose-scanrun.yml up --force-recreate
+#
+# you'll need the --force-recreate flag if you have ever run 'docker-compose down' using ../docker-compose.yml
+# https://github.com/docker/compose/issues/5745

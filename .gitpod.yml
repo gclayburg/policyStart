@@ -1,16 +1,21 @@
-image: gclayburg/synconsolegitpod:latest
 tasks:
-  - command: "export JAVA_OPTS='-Xmx256m -XX:TieredStopAtLevel=1 -noverify' && /home/gitpod/memuser/run.sh --server.port=8092"
-  - command: "echo hello terminal world"
-  - command: "/usr/local/bin/docker-entrypoint.sh mongod"
-  - command: "export JAVA_OPTS='-Xmx1024m -XX:TieredStopAtLevel=1 -noverify' && /home/gitpod/synconsole/run.sh --server.port=8080 --spring.config.location=$(pwd)/configlocal/ --policy.groovy-home=$(pwd)/src/main/groovy "
+  - init: ./gradlew clean build
+    command: echo 'starting build'
+  - name: server run
+    init: docker-compose pull
+    command: "docker-compose up -d && docker-compose -f"
+#  - name: batch pull
+#    init: docker-compose -f config/docker-compose
 ports:
-  - port: 8080
+  - port: 8083
     onOpen: open-preview
-  - port: 8092
+    visibility: public
+  - port: 8091
     onOpen: open-browser
+    visibility: public
   - port: 27017
     onOpen: ignore
+    visibility: private
 
 github:
   prebuilds:

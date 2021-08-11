@@ -1,0 +1,45 @@
+version: '3'
+services:
+  mongo1:
+    image: mongo:4.2.2
+    ports:
+      - "27017:27017"
+    networks:
+      - policynet
+  frontdoor:
+    container_name: frontdoor
+    image: "${DOCKERREPO}/synconsole:latest"
+    environment:
+      JAVA_OPTS: -Xmx1024m -XX:TieredStopAtLevel=1 -noverify
+      POLICY_GROOVY_HOME: /policy
+      SPRING_CONFIG_LOCATION: /config/
+      UPBANNER_DEBUG: "true"
+#    entrypoint: /bin/sh
+#    command: -c "exec java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005 ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -cp /home/springboot/app org.springframework.boot.loader.WarLauncher"
+    volumes:
+      - ./src/main/groovy:/policy
+      - ./config:/config
+    ports:
+      - "8083:8080"
+    networks:
+      - policynet
+    command: --logging.level.org.springframework.web.filter.CommonsRequestLoggingFilter=DEBUG
+
+  memuser:
+    image: "${DOCKERREPO}/memuser:0.9.0"
+
+    environment:
+      - JAVA_OPTS=-Xmx640m -XX:TieredStopAtLevel=1 -noverify
+      - MEMUSER_USER_COUNT=50
+    ports:
+      - "8091:8080"
+    networks:
+      - policynet #shared with config/docker-compose-scanrun.yml
+networks:
+  policynet:
+
+#e.g. run with:
+# $ docker-compose up -d && docker-compose logs -f
+# stop and remove all data:
+# $ docker-compose down
+
