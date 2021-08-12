@@ -1,15 +1,15 @@
 buildscript {
-	repositories {
-		ext.artifactory_resolve_url = project.properties['artifactory_resolve_url'] ?: 'ignorethisinvalidurltrymavencentralinstead'
-		maven {
-			url "${artifactory_resolve_url}"
-		}
-		mavenCentral()
-	}
+    repositories {
+        ext.artifactory_resolve_url = project.properties['artifactory_resolve_url'] ?: 'ignorethisinvalidurltrymavencentralinstead'
+        maven {
+            url "${artifactory_resolve_url}"
+        }
+        mavenCentral()
+    }
 }
 
 plugins {
-	id 'groovy'
+    id 'groovy'
 }
 //apply plugin: 'java'
 group = 'com.gacme.policy'
@@ -17,19 +17,23 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 ext.artifactory_resolve_url = project.properties['artifactory_resolve_url'] ?: 'ignorethisinvalidurltrymavencentralinstead'
 repositories {
-	maven {
+    maven {
 //		allowInsecureProtocol = true  // required by gradle 7+ only
-		url "${artifactory_resolve_url}"
-	}
-	mavenCentral()
+        url "${artifactory_resolve_url}"
+    }
+    mavenCentral()
+    maven {
+        url "pipelinerepo"
+    }
 }
 
 configurations.all {
-	resolutionStrategy.cacheChangingModulesFor 4, 'minutes'  // I want to make sure to try to download the latest snapshot, i.e. scanrunner under development
+    resolutionStrategy.cacheChangingModulesFor 4, 'minutes'
+    // I want to make sure to try to download the latest snapshot, i.e. scanrunner under development
 }
 
 dependencies {
-	implementation('com.garyclayburg:scanrunner:0.8.3')
-	implementation('org.codehaus.groovy:groovy-all:2.4.16') //matches groovy-all nested dependency of spock-core
-    testImplementation(group: 'org.spockframework', name: 'spock-core', version:'1.1-groovy-2.4-rc-2')
+    implementation('com.garyclayburg:stepsapi:0.8.4-SNAPSHOT')
+    implementation('org.codehaus.groovy:groovy-all:2.4.16') //matches groovy-all nested dependency of spock-core
+    testImplementation(group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4-rc-2')
 }

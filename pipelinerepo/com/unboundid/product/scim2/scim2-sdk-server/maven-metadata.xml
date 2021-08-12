@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.unboundid.product.scim2</groupId>
+  <artifactId>scim2-sdk-server</artifactId>
+  <versioning>
+    <latest>2.3.3-SNAPSHOT</latest>
+    <versions>
+      <version>2.3.3-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20210303211709</lastUpdated>
+  </versioning>
+</metadata>
