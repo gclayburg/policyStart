@@ -10,6 +10,13 @@ buildscript {
 
 plugins {
     id 'groovy'
+    id 'idea'
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+    }
 }
 //apply plugin: 'java'
 group = 'com.gacme.policy'
